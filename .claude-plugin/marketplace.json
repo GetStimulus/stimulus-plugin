@@ -11,7 +11,7 @@
   "plugins": [
     {
       "name": "stimulus",
-      "source": ".",
+      "source": "./",
       "description": "7 MCP tools, 10 procurement workflow skills, and a procurement analyst agent for supplier management, diversity compliance, and spend analytics.",
       "version": "1.0.0",
       "author": {
