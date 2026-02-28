@@ -1,6 +1,6 @@
 ---
 name: spend-reconciliation
-description: Reconcile procurement spend against budgets, contracts, and compliance targets with anomaly detection and concentration analysis.
+description: "[Stimulus] Reconcile procurement spend against budgets, contracts, and compliance targets with anomaly detection and concentration analysis."
 argument-hint: "[period, e.g. 'last month' or 'Q4 2025']"
 ---
 

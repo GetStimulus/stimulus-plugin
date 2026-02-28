@@ -1,6 +1,6 @@
 ---
 name: morning-briefing
-description: Generate a daily executive procurement briefing with portfolio health, diversity metrics, pipeline status, and urgent actions.
+description: "[Stimulus] Generate a daily executive procurement briefing with portfolio health, diversity metrics, pipeline status, and urgent actions."
 argument-hint: "[date or 'today']"
 ---
 

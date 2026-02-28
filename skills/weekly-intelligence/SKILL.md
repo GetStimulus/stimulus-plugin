@@ -1,6 +1,6 @@
 ---
 name: weekly-intelligence
-description: Generate a comprehensive weekly procurement intelligence report with health trends, diversity compliance, spend analysis, and pipeline status.
+description: "[Stimulus] Generate a comprehensive weekly procurement intelligence report with health trends, diversity compliance, spend analysis, and pipeline status."
 argument-hint: "[week ending date or 'this week']"
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: diversity-compliance
-description: Audit diversity spend against federal, state, and city targets. Generate compliance reports with gap analysis and corrective actions.
+description: "[Stimulus] Audit diversity spend against federal, state, and city targets. Generate compliance reports with gap analysis and corrective actions."
 argument-hint: "[jurisdiction or 'all', e.g. 'Philadelphia' or 'Federal']"
 ---
 

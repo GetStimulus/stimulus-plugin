@@ -1,6 +1,6 @@
 ---
 name: interaction-logging
-description: Log a supplier interaction (call, meeting, email, site visit) with structured notes, outcome, and follow-up scheduling.
+description: "[Stimulus] Log a supplier interaction (call, meeting, email, site visit) with structured notes, outcome, and follow-up scheduling."
 argument-hint: "<interaction description, e.g. 'call with Acme Corp about contract renewal'>"
 ---
 

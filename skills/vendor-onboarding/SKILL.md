@@ -1,6 +1,6 @@
 ---
 name: vendor-onboarding
-description: Onboard a new supplier with duplicate checking, certification verification, risk screening, and activation tracking.
+description: "[Stimulus] Onboard a new supplier with duplicate checking, certification verification, risk screening, and activation tracking."
 argument-hint: "<company name>"
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: rfp-lifecycle
-description: Manage a full RFP lifecycle from planning through award, including vendor qualification, evaluation scoring, and award recommendation.
+description: "[Stimulus] Manage a full RFP lifecycle from planning through award, including vendor qualification, evaluation scoring, and award recommendation."
 argument-hint: "<project ID or description>"
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: risk-assessment
-description: Assess supplier risk across financial, operational, compliance, and reputational dimensions with mitigation planning.
+description: "[Stimulus] Assess supplier risk across financial, operational, compliance, and reputational dimensions with mitigation planning."
 argument-hint: "<company name or ID>"
 ---
 

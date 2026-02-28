@@ -1,6 +1,6 @@
 ---
 name: contract-renewal
-description: Assess whether to renew, renegotiate, or re-bid an expiring contract based on supplier health and performance data.
+description: "[Stimulus] Assess whether to renew, renegotiate, or re-bid an expiring contract based on supplier health and performance data."
 argument-hint: "<company name or ID>"
 ---
 

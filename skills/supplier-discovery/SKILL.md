@@ -1,6 +1,6 @@
 ---
 name: supplier-discovery
-description: Find, qualify, and shortlist suppliers using AI-powered semantic search with diversity and relationship scoring.
+description: "[Stimulus] Find, qualify, and shortlist suppliers using AI-powered semantic search with diversity and relationship scoring."
 argument-hint: "<search query, e.g. 'HVAC contractors in PA with MBE certification'>"
 ---
 
