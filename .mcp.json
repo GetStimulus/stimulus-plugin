@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "stimulus": {
+      "type": "http",
+      "url": "${STIMULUS_MCP_URL:-http://localhost:3000/api/mcp}"
+    }
+  }
+}

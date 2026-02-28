@@ -1,0 +1,31 @@
+{
+  "name": "stimulus-tools",
+  "owner": {
+    "name": "Stimulus AI",
+    "email": "engineering@getstimulus.ai"
+  },
+  "metadata": {
+    "description": "Stimulus procurement intelligence — supplier search, portfolio health, diversity compliance, spend analytics, and procurement workflow automation.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "stimulus",
+      "source": ".",
+      "description": "7 MCP tools, 10 procurement workflow skills, and a procurement analyst agent for supplier management, diversity compliance, and spend analytics.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Stimulus AI"
+      },
+      "homepage": "https://getstimulus.ai",
+      "keywords": [
+        "procurement",
+        "supplier-diversity",
+        "spend-analytics",
+        "vendor-management",
+        "compliance"
+      ],
+      "category": "business"
+    }
+  ]
+}
