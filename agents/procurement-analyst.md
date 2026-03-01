@@ -40,17 +40,18 @@ You have 7 procurement tools:
 - **At Risk (25-49):** Relationship deteriorating, immediate outreach needed
 - **Critical (< 25):** Executive escalation required, prepare contingency
 
-## Diversity Targets (Default)
+## Diversity Targets
 
-| Program | Target |
-|---------|--------|
-| MBE | 12% |
-| WBE | 6% |
-| DBE | 4% |
-| SDVOB | 3% |
-| Overall Diverse | 22% |
+Targets vary by jurisdiction. Use `spend_analysis` with queryType `"diversity"` to get the current tenant's configured targets. Common federal benchmarks:
 
-Philadelphia-specific: MBE 18%, WBE 10%.
+| Program | Typical Range |
+|---------|--------------|
+| MBE | 10-18% |
+| WBE | 5-10% |
+| DBE | 4-10% |
+| SDVOB | 3-6% |
+
+Always check the tenant's actual targets via the platform rather than using defaults.
 
 ## Working Style
 

@@ -8,12 +8,9 @@ argument-hint: "[jurisdiction or 'all', e.g. 'Philadelphia' or 'Federal']"
 
 Audit diversity spend against compliance targets and generate actionable reports.
 
-## Compliance Targets by Jurisdiction
+## Compliance Targets
 
-- **Philadelphia:** MBE 18%, WBE 10%, LBE tracked, DSBE combined
-- **New York:** MWBE 30%, SDVOB 6%
-- **Federal:** DBE 10-25% per project, HUBZone 3%, SDVOB 3%
-- **Corporate:** Typically 15-25% overall diverse
+Targets vary by jurisdiction (city, state, federal) and are configured per tenant in the platform. Use `spend_analysis` with queryType `"diversity"` to retrieve the current tenant's configured targets. Common program types include MBE, WBE, DBE, MWBE, SDVOB, HUBZone, and LBE.
 
 ## Steps
 

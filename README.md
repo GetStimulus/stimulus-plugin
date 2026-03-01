@@ -1,69 +1,54 @@
-# Stimulus Claude Code Plugin
+# Stimulus Plugin for Claude Code
 
-Procurement intelligence plugin for Claude Code. Provides 7 MCP tools, 10 procurement workflow skills, and a specialized procurement analyst agent.
+Procurement intelligence plugin for [Claude Code](https://claude.ai/code). Provides 7 MCP tools, 10 procurement workflow skills, and a specialized procurement analyst agent — all connected to your Stimulus account via OAuth.
 
-## Prerequisites
+## Quick Start
 
-1. **Stimulus dev servers running:**
-   ```bash
-   bun run dev   # starts API (port 8000) + Web/BFF (port 3000)
-   ```
-2. **Clerk OAuth Application** enabled in Clerk Dashboard (for OAuth flow)
-3. **Dependencies installed** (`bun install` in monorepo root)
-
-## Authentication
-
-The plugin uses **OAuth 2.1 with PKCE** via Clerk. When you first use a tool, Claude Code opens a browser for Clerk/Google login. No API keys or env vars needed on your machine.
-
-### How OAuth Works
-
-1. Plugin connects to the MCP HTTP endpoint (`/api/mcp`)
-2. Server returns `401` with `WWW-Authenticate` pointing to `/.well-known/oauth-protected-resource/mcp`
-3. Claude Code discovers Clerk's authorization server via `/.well-known/oauth-authorization-server`
-4. You authenticate in the browser (Google login via Clerk)
-5. Claude Code receives an OAuth token and sends it with each MCP request
-6. Server validates the token, resolves your tenant from JWT claims
-7. Tools call the BFF with your Bearer token, which forwards to FastAPI
-
-### Custom MCP URL
-
-By default the plugin connects to `http://localhost:3000/api/mcp`. Override with:
+### Install from Marketplace
 
 ```bash
-STIMULUS_MCP_URL=https://console.getstimulus.ai/api/mcp claude --plugin-dir ./stimulus-plugin
+/plugin marketplace add GetStimulus/stimulus-plugin
+/plugin install stimulus@stimulus-plugin
 ```
 
-### Production
-
-For deployed environments, set `STIMULUS_MCP_URL`:
-
-```bash
-STIMULUS_MCP_URL=https://console.getstimulus.ai/api/mcp claude --plugin-dir ./stimulus-plugin
-```
-
-### Falling Back to Stdio (M2M Tokens)
-
-If you need stdio transport instead of OAuth (e.g., for CI or environments without a browser), use the MCP CLI directly:
-
-```bash
-claude mcp add stimulus \
-  -e STIMULUS_TENANT_ID=org_2tXuPzB4PVasAeTPTujeppDYl8b \
-  -- npx tsx apps/web/src/mcp/server/stdio.ts
-```
-
-This requires `CLERK_SECRET_KEY` and `CLERK_MACHINE_SECRET_KEY` in your environment.
-
-## Installation
-
-From the monorepo root:
+### Or use locally (development)
 
 ```bash
 claude --plugin-dir ./stimulus-plugin
 ```
 
-Or add to your Claude Code settings for persistent use.
+## Authentication
 
-## Available Skills (Slash Commands)
+The plugin uses **OAuth 2.1 with PKCE** via Clerk. When you first use a tool:
+
+1. Claude Code connects to the Stimulus MCP endpoint
+2. You authenticate in the browser (sign in via Clerk)
+3. Your OAuth token is used for all subsequent requests
+4. Your organization and tenant are resolved automatically from your account
+
+No API keys or environment variables needed.
+
+### Custom MCP URL
+
+By default the plugin connects to `http://localhost:3000/api/mcp` (local development). Override with:
+
+```bash
+STIMULUS_MCP_URL=https://<your-instance>/api/mcp claude --plugin-dir ./stimulus-plugin
+```
+
+### Stdio Transport (CI / Headless)
+
+For environments without a browser (CI pipelines, remote servers), use stdio transport with M2M tokens:
+
+```bash
+claude mcp add stimulus \
+  -e STIMULUS_TENANT_ID=<your-clerk-org-id> \
+  -- npx tsx apps/web/src/mcp/server/stdio.ts
+```
+
+Requires `CLERK_SECRET_KEY` and `CLERK_MACHINE_SECRET_KEY` in your environment. Contact your Stimulus admin for credentials.
+
+## Skills
 
 | Command | Description |
 |---------|-------------|
@@ -80,73 +65,40 @@ Or add to your Claude Code settings for persistent use.
 
 ## MCP Tools
 
-The plugin exposes 7 MCP tools:
-
 | Tool | Description |
 |------|-------------|
-| `supplier_search` | AI-powered semantic supplier search with filters |
+| `supplier_search` | Semantic supplier search with location, certification, and industry filters |
 | `portfolio_health` | Portfolio-wide relationship health overview |
 | `load_relationship` | Detailed supplier relationship data |
 | `log_interaction` | Record supplier interactions |
 | `supplier_performance` | Supplier journey and performance metrics |
-| `spend_analysis` | Spend analytics (metrics, trends, diversity, industries, top suppliers) |
+| `spend_analysis` | Spend analytics — metrics, trends, diversity breakdown, top suppliers |
 | `project_info` | Procurement project and RFP management |
 
 ## Procurement Analyst Agent
 
-The plugin includes a specialized `procurement-analyst` agent that auto-activates for procurement questions. It has access to all 7 MCP tools and understands:
-
-- Health score interpretation (Healthy/Watch/At Risk/Critical thresholds)
-- Diversity compliance targets (MBE, WBE, DBE, SDVOB)
-- Contract renewal decision framework
-- Risk assessment methodology
-- RFP evaluation scoring dimensions
+The plugin includes a `procurement-analyst` agent that auto-activates for procurement questions. It understands supplier health scoring, diversity compliance, contract renewal decisions, risk assessment, and RFP evaluation.
 
 ## Troubleshooting
 
 ### OAuth login doesn't open
-Ensure the Next.js dev server is running at the URL in `.mcp.json` (default `http://localhost:3000`).
+Ensure the Stimulus server is running at the URL configured in `.mcp.json`.
 
 ### Tools return 401/403
-1. Check that the BFF is running (`bun run web:dev`)
-2. Try reconnecting — your OAuth token may have expired
-3. Verify Clerk OAuth Application is enabled in the Clerk Dashboard
+- Your OAuth token may have expired — reconnect by running a tool again
+- Verify your Clerk account has access to the target organization
 
-### "Connection refused" errors
-The plugin connects to `http://localhost:3000/api/mcp` by default. Ensure both dev servers are running (`bun run dev`).
+### "Connection refused"
+The default endpoint is `http://localhost:3000/api/mcp`. Make sure the dev server is running (`bun run dev` in the Stimulus monorepo).
 
-### Checking MCP server logs
-In Claude Code, MCP server logs appear in the MCP panel. The HTTP transport logs to the Next.js server console.
+## Updating
 
-## Architecture
-
-```
-Claude Code
-  |
-  |- stimulus-plugin/
-  |   |- .claude-plugin/plugin.json   (manifest)
-  |   |- .mcp.json                    (HTTP transport + OAuth)
-  |   |- skills/                      (10 workflow skills)
-  |   |- agents/                      (procurement analyst agent)
-  |   '- settings.json                (agent auto-invocation)
-  |
-  '- MCP HTTP Transport (OAuth 2.1 PKCE)
-      |
-      '- POST /api/mcp
-          |
-          |- Clerk OAuth token validation
-          |- Tenant resolved from JWT claims
-          |
-          '- BFF Proxy (Next.js :3000)
-              |
-              '- FastAPI Backend (:8000)
-                  |
-                  '- PostgreSQL (multi-tenant)
+```bash
+/plugin update stimulus@stimulus-plugin
 ```
 
-### OAuth Metadata Endpoints
+Claude Code checks for updates on session start. Bump the version in `plugin.json` to publish updates.
 
-| Endpoint | RFC | Purpose |
-|----------|-----|---------|
-| `/.well-known/oauth-protected-resource/mcp` | RFC 9728 | Tells clients which auth server to use |
-| `/.well-known/oauth-authorization-server` | RFC 8414 | Clerk's OAuth endpoints (authorize, token, JWKS) |
+## License
+
+Proprietary. For use by authorized Stimulus platform users only.
