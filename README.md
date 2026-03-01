@@ -30,10 +30,10 @@ No API keys or environment variables needed.
 
 ### Custom MCP URL
 
-By default the plugin connects to `http://localhost:3000/api/mcp` (local development). Override with:
+By default the plugin connects to `https://console.getstimulus.ai/api/mcp`. For local development, override with:
 
 ```bash
-STIMULUS_MCP_URL=https://<your-instance>/api/mcp claude --plugin-dir ./stimulus-plugin
+STIMULUS_MCP_URL=http://localhost:3000/api/mcp claude --plugin-dir ./stimulus-plugin
 ```
 
 ### Stdio Transport (CI / Headless)
